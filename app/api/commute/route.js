@@ -17,7 +17,7 @@ export async function POST(request) {
         }
 
         // Fetch travel time using Google Maps API
-        const apiKey = "AIzaSyBVVt0U1jyRyfNXeBBsrIJEmF732Q-2zws";
+        const apiKey = process.env.GOOGLE_MAPS_API_KEY;
         const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(
             origin
         )}&destinations=${encodeURIComponent(destination)}&departure_time=now&key=${apiKey}`;
