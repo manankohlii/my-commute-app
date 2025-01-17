@@ -10,30 +10,31 @@ export default function Home() {
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (e) => {
-      e.preventDefault();
-      const data = { 
-          destination, 
-          startRange, 
-          endRange 
-      }; // Remove 'notificationTime' since it's unused
-  
-      const response = await fetch('/api/commute', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-      });
-  
-      if (response.ok) {
-          const result = await response.json();
-          alert(`Best time to leave: ${result.bestTime}`);
-      } else {
-          const error = await response.json();
-          alert(`Error: ${error.message || 'Unable to determine the best departure time.'}`);
-      }
-  };
-  
+        e.preventDefault();
+        const data = {
+            origin,
+            destination,
+            startRange,
+            endRange,
+        };
+
+        const response = await fetch('/api/commute', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(`Best time to leave: ${result.bestDepartureTime} with a travel time of ${result.travelTimeInSeconds} seconds.`);
+        } else {
+            const error = await response.json();
+            alert(`Error: ${error.message || 'Unable to determine the best departure time.'}`);
+        }
+    };
+
     return (
         <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#f7f7f7', padding: '20px' }}>
             <h1 style={{ color: '#2c3e50', textAlign: 'center' }}>Commute Assistant</h1>
@@ -68,9 +69,9 @@ export default function Home() {
                         color: 'blue',
                     }}
                 />
-                <label style={{ display: 'block', marginBottom: '8px', color: '#34495e' }}>Start Time:</label>
+                <label style={{ display: 'block', marginBottom: '8px', color: '#34495e' }}>Start Date and Time:</label>
                 <input
-                    type="time"
+                    type="datetime-local"
                     value={startRange}
                     onChange={(e) => setStartRange(e.target.value)}
                     required
@@ -83,9 +84,9 @@ export default function Home() {
                         color: 'blue',
                     }}
                 />
-                <label style={{ display: 'block', marginBottom: '8px', color: '#34495e' }}>End Time:</label>
+                <label style={{ display: 'block', marginBottom: '8px', color: '#34495e' }}>End Date and Time:</label>
                 <input
-                    type="time"
+                    type="datetime-local"
                     value={endRange}
                     onChange={(e) => setEndRange(e.target.value)}
                     required
