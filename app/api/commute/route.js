@@ -51,6 +51,8 @@ export async function POST(request) {
                     { status: 500, headers: { "Content-Type": "application/json" } }
                 );
             }
+            console.log("Google Maps API URL:", url);
+console.log("Google Maps API Response:", response.status, response.statusText);
 
             const data = await response.json();
             console.log("Google Maps API Response:", JSON.stringify(data, null, 2));
