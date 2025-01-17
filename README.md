@@ -3,6 +3,7 @@ To add:
 2. Notification feature
 3. User Login
 4. Arrive By feature along with user specified departure times
+   
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
